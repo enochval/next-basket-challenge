@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+
+  db:
+    environment:
+      MARIADB_ROOT_PASSWORD: secret
+      MARIADB_DATABASE: example
+      MARIADB_USER: example
+      MARIADB_PASSWORD: secret
+    container_name: users-service.db
+    image: mariadb:10.7.4
+    ports:
+      - "3360:3306"
+    restart: unless-stopped
+    volumes:
+      - users-service.dbdata:/var/lib/mysql/
+    networks:
+      - users-service
+
+  app:
+    build:
+      context: ./../../users-service/
+      dockerfile: ./../etc/docker/php.Dockerfile
+    container_name: users-service.app
+    command: php -S users-service.app:8080 -t ./api/public
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    tty: true
+    volumes:
+      - ./../../users-service/:/var/www
+    depends_on:
+      - db
+    networks:
+      - users-service
+
+networks:
+  users-service:
+    driver: bridge
+
+volumes:
+  users-service.dbdata:
+    driver: local
