@@ -33,9 +33,22 @@ final class User extends AggregateRoot
     ): User
     {
         $user = new self($id, $firstName, $lastName, $email);
-
-        // record an event
+        $user->record(new UserCreated(
+            $id->value, $user->toArray()
+        ));
 
         return $user;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id->value,
+            'firstName' => $this->firstName->value,
+            'lastName' => $this->lastName->value,
+            'email' => $this->email->value,
+        ];
+    }
+
+
 }

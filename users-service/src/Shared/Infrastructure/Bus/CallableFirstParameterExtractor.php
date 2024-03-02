@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Bus;
 
+use App\Shared\Domain\Bus\Event\DomainEventSubscriberInterface;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
 use function Lambdish\Phunctional\map;
 use function Lambdish\Phunctional\reindex;
-
-//use function Lambdish\Phunctional\reduce;
+use function Lambdish\Phunctional\reduce;
 
 final class CallableFirstParameterExtractor
 {
@@ -19,9 +19,29 @@ final class CallableFirstParameterExtractor
         return map(self::unflatten(), reindex(self::classExtractor(new self()), $callables));
     }
 
-    private static function classExtractor(CallableFirstParameterExtractor $parameterExtractor): callable
+    public static function forPipedCallables(iterable $callables): array
+    {
+        return reduce(self::pipedCallablesReducer(), $callables, []);
+    }
+
+    private static function classExtractor(
+        CallableFirstParameterExtractor $parameterExtractor
+    ): callable
     {
         return static fn(callable $handler): ?string => $parameterExtractor->extract($handler);
+    }
+
+    private static function pipedCallablesReducer(): callable
+    {
+        return static function ($subscribers, DomainEventSubscriberInterface $subscriber): array {
+            $subscribedEvents = $subscriber::subscribedTo();
+
+            foreach ($subscribedEvents as $subscribedEvent) {
+                $subscribers[$subscribedEvent][] = $subscriber;
+            }
+
+            return $subscribers;
+        };
     }
 
     private static function unflatten(): callable

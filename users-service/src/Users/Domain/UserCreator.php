@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Users\Domain;
 
-use App\Shared\Domain\ValueObject\EmailValueObject;
-use App\Shared\Domain\ValueObject\NameValueObject;
-use App\Shared\Domain\ValueObject\UuidValueObject;
+use App\Shared\Domain\Bus\Event\EventBusInterface;
 use Mguinea\Criteria\Criteria;
 use Mguinea\Criteria\Filter;
 use Mguinea\Criteria\FilterOperator;
@@ -14,7 +12,8 @@ use Mguinea\Criteria\FilterOperator;
 class UserCreator
 {
     public function __construct(
-        private readonly UsersRepositoryInterface $usersRepository
+        private readonly UsersRepositoryInterface $usersRepository,
+        private readonly EventBusInterface $bus
     ){}
 
     /**
@@ -41,6 +40,6 @@ class UserCreator
 
         $user = User::create($id, $firstName, $lastName, $email);
         $this->usersRepository->save($user);
-        // fire user created event...
+        $this->bus->publish(...$user->pullDomainEvents());
     }
 }
