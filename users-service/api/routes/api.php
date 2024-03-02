@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Api\Http\Controllers\CreateUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::get('/ping', fn() => response()->json('pong'));
+Route::post('/user', CreateUserController::class);

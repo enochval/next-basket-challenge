@@ -12,3 +12,16 @@ build: ## Build the stack
 .PHONY: up
 up: ## Environment up!
 	$(USER_SERVICE_DOCKER_COMPOSE) up -d --build --force-recreate --renew-anon-volumes
+
+.PHONY: destroy
+destroy:
+	$(USER_SERVICE_DOCKER_COMPOSE) down --remove-orphans --volumes
+	$(USER_SERVICE_DOCKER_COMPOSE) rm --stop --volumes --force
+
+## ----------------------
+## Laravel commands
+## ----------------------
+
+.PHONY: migrate
+migrate:
+	$(USER_SERVICE_DOCKER_COMPOSE) exec app bash -c "php ./api/artisan migrate"

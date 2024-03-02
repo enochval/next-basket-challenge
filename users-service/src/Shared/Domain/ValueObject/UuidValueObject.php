@@ -12,9 +12,9 @@ class UuidValueObject
         $this->assertIsValidUuid($value);
     }
 
-    public static function fromValue(string $value): UuidValueObject
+    public static function fromValue(string $value): static
     {
-        return new self($value);
+        return new static($value);
     }
 
     public static function random(): UuidValueObject

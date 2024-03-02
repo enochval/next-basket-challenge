@@ -3,18 +3,24 @@ version: '3.7'
 services:
 
   db:
-    environment:
-      MARIADB_ROOT_PASSWORD: secret
-      MARIADB_DATABASE: example
-      MARIADB_USER: example
-      MARIADB_PASSWORD: secret
+    image: mysql:8
     container_name: users-service.db
-    image: mariadb:10.7.4
-    ports:
-      - "3360:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: user-service
     restart: unless-stopped
+    ports:
+      - "3307:3306"
     volumes:
       - users-service.dbdata:/var/lib/mysql/
+    networks:
+      - users-service
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"
     networks:
       - users-service
 
@@ -28,6 +34,8 @@ services:
     ports:
       - "8080:8080"
     tty: true
+    env_file:
+      - ./../../users-service/.env
     volumes:
       - ./../../users-service/:/var/www
     depends_on:

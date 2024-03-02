@@ -27,6 +27,7 @@
     23 => 'Api\\Providers\\AuthServiceProvider',
     24 => 'Api\\Providers\\EventServiceProvider',
     25 => 'Api\\Providers\\RouteServiceProvider',
+    26 => 'Api\\Providers\\UserServiceProvider',
   ),
   'eager' => 
   array (
@@ -44,6 +45,7 @@
     11 => 'Api\\Providers\\AuthServiceProvider',
     12 => 'Api\\Providers\\EventServiceProvider',
     13 => 'Api\\Providers\\RouteServiceProvider',
+    14 => 'Api\\Providers\\UserServiceProvider',
   ),
   'deferred' => 
   array (

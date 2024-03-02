@@ -12,9 +12,9 @@ class EmailValueObject
         $this->assertIsValidEmail($value);
     }
 
-    public static function fromValue(string $value): EmailValueObject
+    public static function fromValue(string $value): static
     {
-        return new self($value);
+        return new static($value);
     }
 
     private function assertIsValidEmail(string $email): void

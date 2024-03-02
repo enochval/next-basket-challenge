@@ -10,8 +10,8 @@ class NameValueObject
     {
     }
 
-    public static function fromValue(string $value): NameValueObject
+    public static function fromValue(string $value): static
     {
-        return new self($value);
+        return new static($value);
     }
 }

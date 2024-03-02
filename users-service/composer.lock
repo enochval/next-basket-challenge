@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "252458ae7366e4c8cb99e6c5a8b47d7b",
+    "content-hash": "683f5fec0a1d5be24f6b05c7d27ac9da",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1781,6 +1781,51 @@
                 }
             ],
             "time": "2024-01-28T23:22:08+00:00"
+        },
+        {
+            "name": "mguinea/php-criteria",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mguinea/php-criteria.git",
+                "reference": "8ff940466ac71cf0aaa5122f6640da7388d69426"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mguinea/php-criteria/zipball/8ff940466ac71cf0aaa5122f6640da7388d69426",
+                "reference": "8ff940466ac71cf0aaa5122f6640da7388d69426",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^9.5"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mguinea\\Criteria\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marc Guinea",
+                    "email": "develop.marcguinea@gmail.com"
+                }
+            ],
+            "description": "PHP Criteria object to implement specification pattern",
+            "support": {
+                "issues": "https://github.com/mguinea/php-criteria/issues",
+                "source": "https://github.com/mguinea/php-criteria/tree/main"
+            },
+            "time": "2022-11-28T15:49:23+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8085,7 +8130,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "mguinea/php-criteria": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
