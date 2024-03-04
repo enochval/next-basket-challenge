@@ -27,16 +27,17 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 
-RUN mkdir -p /var/www
-WORKDIR /var/www
-COPY ./ /var/www/
-
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN mkdir -p /var/www
 
 # Set working directory
 WORKDIR /var/www
 
+COPY ./ /var/www/
+
+# Install PHP dependencies
 RUN composer install --no-scripts
 
 RUN echo "memory_limit=1024M" >> /usr/local/etc/php/conf.d/php.ini

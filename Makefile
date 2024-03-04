@@ -35,3 +35,4 @@ migrate:
 .PHONY: test
 test:
 	$(USER_SERVICE_DOCKER_COMPOSE) exec app bash -c "./vendor/bin/pest"
+	$(USER_SERVICE_DOCKER_COMPOSE) exec app bash -c "./vendor/bin/phpunit ./api/"
