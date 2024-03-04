@@ -21,8 +21,8 @@ ensuring scalability, maintainability, and flexibility.
 
 ### Environment
 
-- Clone this project: `git clone https://github.com/mguinea/laravel-ddd-example laravel-ddd-example`
-- Move to the project folder: `cd laravel-ddd-example`
+- Clone this project: `git clone https://github.com/enochval/next-basket-challenge.git`
+- Move to the project folder: `cd next-basket-challenge`
 
 ### Execution
 
@@ -44,10 +44,15 @@ Postman API collection [here](https://documenter.getpostman.com/view/1434697/2sA
 
 Execute all test suites: `make tests`
 
+### Stop Containers
+
+Execute `make destory` to stop all running containers.
+
 ### RabbitMQ
 
 There is a service with RabbitMQ to manage queues. You can access it going to ` http://localhost:15672` and using `guest` as username and password.
+The consumed message is stored in a file called `consumer-log.json`in the `notification-service`
 
-### RabbitMQ
+### Admirer
 
 There is a service to with Admirer to manage the database. You can access it going to ` http://localhost:8081` and using `root` as username and `secret` password.
