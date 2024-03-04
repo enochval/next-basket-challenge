@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+
+  app:
+    build:
+      context: ./../../notifications-service/
+      dockerfile: ./../etc/docker/php.Dockerfile
+    container_name: notifications-service.app
+    command: php framework/artisan rabbitmq:consumer
+    restart: unless-stopped
+    tty: true
+    environment:
+      RABBITMQ_HOST: users-service.rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASSWORD: guest
+      RABBITMQ_VHOST: /
+    volumes:
+      - ./../../notifications-service/:/var/www
+    networks:
+      - next-basket-user_users-service
+
+networks:
+  next-basket-user_users-service:
+    driver: bridge
+    external: true

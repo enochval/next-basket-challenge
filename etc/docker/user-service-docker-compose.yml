@@ -34,8 +34,16 @@ services:
     ports:
       - "8080:8080"
     tty: true
-    env_file:
-      - ./../../users-service/.env
+    environment:
+      RABBITMQ_HOST: users-service.rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASSWORD: guest
+      RABBITMQ_VHOST: /
+      DB_DATABASE: user-service
+      DB_USERNAME: root
+      DB_PASSWORD: secret
+      DB_HOST: users-service.db
     volumes:
       - ./../../users-service/:/var/www
     depends_on:

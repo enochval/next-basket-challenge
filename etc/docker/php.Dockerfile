@@ -25,7 +25,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets
 
 RUN mkdir -p /var/www
 WORKDIR /var/www
@@ -36,6 +36,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # Set working directory
 WORKDIR /var/www
+
+RUN composer install --no-scripts
 
 RUN echo "memory_limit=1024M" >> /usr/local/etc/php/conf.d/php.ini
 RUN echo "allow_url_fopen=on" >> /usr/local/etc/php/conf.d/php.ini

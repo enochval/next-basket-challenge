@@ -26,7 +26,7 @@ abstract class AbstractDomainEvent
         string $occurredOn
     ): self;
 
-    abstract public static function eventName(): string;
+    abstract public function eventName(): string;
 
     abstract public function toPrimitives(): array;
 }

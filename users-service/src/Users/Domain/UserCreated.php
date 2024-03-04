@@ -29,7 +29,7 @@ class UserCreated extends AbstractDomainEvent
         );
     }
 
-    public static function eventName(): string
+    public function eventName(): string
     {
         return 'user.created';
     }
